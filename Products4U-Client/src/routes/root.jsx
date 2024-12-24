@@ -1,43 +1,25 @@
+import Header from "../components/Header";
+import Footer from "../components/Footer";
+import AboutUs from "../components/AboutUs";
+import SliderExplained from "../components/SliderExplained";
+import RecentQueries from "../components/RecentQueries";
+import FAQSection from "../components/FAQSection";
+
 export default function Root() {
     return (
         <>
-            <div id="sidebar">
-                <h1>React Router Contacts</h1>
+            <Header />
                 <div>
-                    <form id="search-form" role="search">
-                        <input
-                            id="q"
-                            aria-label="Search contacts"
-                            placeholder="Search"
-                            type="search"
-                            name="q"
-                        />
-                        <div
-                            id="search-spinner"
-                            aria-hidden
-                            hidden={true}
-                        />
-                        <div
-                            className="sr-only"
-                            aria-live="polite"
-                        ></div>
-                    </form>
-                    <form method="post">
-                        <button type="submit">New</button>
-                    </form>
+                    {/* Explanation Slider */}
+                    <SliderExplained/>
+                    {/* Recent Queries */}
+                    <RecentQueries/>
+                    {/* FAQ (How to navigate website) */}
+                    <FAQSection/>
+                    {/* About Us (Timeline of proj)*/}
+                    <AboutUs/>
                 </div>
-                <nav>
-                    <ul>
-                        <li>
-                            <a href={`/contacts/1`}>Your Name</a>
-                        </li>
-                        <li>
-                            <a href={`/contacts/2`}>Your Friend</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div id="detail"></div>
+            <Footer />
         </>
     );
 }

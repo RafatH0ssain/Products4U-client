@@ -1,4 +1,5 @@
 import * as React from "react";
+import { StrictMode } from 'react'
 import * as ReactDOM from "react-dom/client";
 import {
   createBrowserRouter,
@@ -17,6 +18,7 @@ import AddQuery from "./pages/AddQuery";
 import MyProductList from "./pages/MyProductList";
 import MyRecommendations from "./pages/MyRecommendations";
 import MyQueryRecommendations from "./pages/MyQueryRecommendations";
+import AuthProvider from "./provider/AuthProvider";
 
 const router = createBrowserRouter([
   { //  Home Page
@@ -113,7 +115,9 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <StrictMode>
+    <AuthProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </AuthProvider>
+  </StrictMode>,
 );
