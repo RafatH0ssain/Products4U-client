@@ -7,6 +7,16 @@ import {
 import "./index.css";
 import Root from "./routes/root";
 import ErrorPage from "./error-page";
+import AllQueries from "./pages/AllQueries";
+import PrivateRoute from "./routes/PrivateRoute";
+import QueryDetails from "./pages/QueryDetails";
+import AuthLayout from "./pages/AuthLayout";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import AddQuery from "./pages/AddQuery";
+import MyProductList from "./pages/MyProductList";
+import MyRecommendations from "./pages/MyRecommendations";
+import MyQueryRecommendations from "./pages/MyQueryRecommendations";
 
 const router = createBrowserRouter([
   { //  Home Page
