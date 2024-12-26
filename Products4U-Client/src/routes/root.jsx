@@ -9,7 +9,7 @@ export default function Root() {
     return (
         <>
             <Header />
-                <div>
+                <div className="w-11/12 mx-auto">
                     {/* Explanation Slider */}
                     <SliderExplained/>
                     {/* Recent Queries */}
