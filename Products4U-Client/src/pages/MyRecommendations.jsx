@@ -49,7 +49,6 @@ const MyRecommendations = () => {
                                 <p className="text-gray-400 mt-2"><strong>Recommendation Reason:</strong> {recommendation.reason}</p>
                                 <p className="text-gray-400 mt-2"><strong>Query Title:</strong> {recommendation.queryTitle}</p>
                                 <p className="text-gray-400 mt-2"><strong>Query ID:</strong> {recommendation.queryId}</p>
-                                <p className="text-gray-400 mt-2"><strong>User Email:</strong> {recommendation.userEmail || "Not available"}</p>
                                 <p className="text-gray-400 mt-2"><strong>Recommender Email:</strong> {recommendation.recommenderEmail}</p>
                                 <p className="text-gray-400 mt-2"><strong>Timestamp:</strong> {new Date(recommendation.timestamp).toLocaleString()}</p>
                             </div>
