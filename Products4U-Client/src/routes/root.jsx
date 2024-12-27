@@ -14,7 +14,7 @@ export default function Root() {
                 {/* Explanation Slider */}
                 <SliderExplained />
                 {/* Recent Queries */}
-                <RecentQueries />
+                <RecentQueries  />
                 {/* FAQ (How to navigate website) */}
                 <FAQSection />
                 {/* About Us (Timeline of proj)*/}

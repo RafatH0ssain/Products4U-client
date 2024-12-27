@@ -10,15 +10,15 @@ const AllQueries = () => {
         loadedData = useLoaderData();
     } catch (error) {
         console.error("useLoaderData error:", error);
-        loadedData = { equipments: [], categories: [] };
+        loadedData = { queries: [], categories: [] };
     }
 
-    const [equipments, setEquipment] = useState([]);
+    const [queries, setQueries] = useState([]);
 
     // Ensure we handle data properly after the component mounts
     useEffect(() => {
-        if (loadedData?.equipments) {
-            setEquipment(loadedData.equipments);
+        if (loadedData?.queries) {
+            setQueries(loadedData.queries);
         }
     }, [loadedData]);
 
@@ -28,7 +28,7 @@ const AllQueries = () => {
                 <Header />
                 <div className="w-11/12 mx-auto px-4 py-10">
                     <h2 className="text-5xl font-bold text-left mb-6">All Queries:</h2>
-                    {equipments.length > 0 ? (
+                    {queries.length > 0 ? (
                         <table className="min-w-full table-auto border-collapse">
                             <thead>
                                 <tr className="bg-gray-200">
@@ -39,13 +39,13 @@ const AllQueries = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                {equipments.map((equipment) => (
-                                    <tr key={equipment._id} className="border-b">
-                                        <td className="px-4 py-2">{equipment.itemName}</td>
-                                        <td className="px-4 py-2">{equipment.categoryName}</td>
-                                        <td className="px-4 py-2">{equipment.price} USD</td>
+                                {queries.map((query) => (
+                                    <tr key={query._id} className="border-b">
+                                        <td className="px-4 py-2">{query.itemName}</td>
+                                        <td className="px-4 py-2">{query.categoryName}</td>
+                                        <td className="px-4 py-2">{query.price} USD</td>
                                         <td className="px-4 py-2">
-                                            <Link to={`/equipment/${equipment._id}`} className="text-blue-500 hover:text-blue-700">
+                                            <Link to={`/query/${query._id}`} className="text-blue-500 hover:text-blue-700">
                                                 View Details
                                             </Link>
                                         </td>
@@ -54,7 +54,7 @@ const AllQueries = () => {
                             </tbody>
                         </table>
                     ) : (
-                        <p>No equipment available at the moment.</p>
+                        <p>No query available at the moment.</p>
                     )}
                 </div>
                 <Footer />

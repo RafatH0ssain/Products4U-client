@@ -1,6 +1,6 @@
 const AboutUs = () => {
     return (
-        <div>
+        <div id="about-us">
             <h2 className="text-5xl mt-20 mb-5 font-extrabold text-left">Our Timeline:</h2>
             <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical">
                 <li>

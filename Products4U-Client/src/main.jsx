@@ -15,7 +15,7 @@ import AuthLayout from "./pages/AuthLayout";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import AddQuery from "./pages/AddQuery";
-import MyProductList from "./pages/MyProductList";
+import MyQueryList from "./pages/MyQueryList";
 import MyRecommendations from "./pages/MyRecommendations";
 import MyQueryRecommendations from "./pages/MyQueryRecommendations";
 import AuthProvider from "./provider/AuthProvider";
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
     loader: async () => {
       try {
         const response = await Promise.all([
-          fetch('https://sport-kek-server.vercel.app/equipment'),
+          fetch('https://http://localhost:5000/queries'),
         ]);
 
         if (!response[0].ok) {
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
     path: "/myQueries",
     element:
       <PrivateRoute>
-        <MyProductList />
+        <MyQueryList />
       </PrivateRoute>,
     loader: async () => {
       try {
