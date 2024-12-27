@@ -28,33 +28,31 @@ const router = createBrowserRouter([
   },
   { // Queries Page
     path: "/queries",
-    element: <AllQueries></AllQueries>,
+    element: <AllQueries/>,
     loader: async () => {
       try {
-        const response = await Promise.all([
-          fetch('https://http://localhost:5000/queries'),
-        ]);
-
-        if (!response[0].ok) {
+        const response = await fetch('http://localhost:5000/queries');
+    
+        if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-
-        return {
-          queries: await response[0].json(),
-        };
+    
+        const queries = await response.json();
+        console.log("Fetched queries:", queries);  // To debug
+        return { queries };
       } catch (error) {
         console.error("Error fetching loader data:", error);
         return { queries: [] };
       }
-    }
+    }    
   },
   { //  Query Details Page
-    path: "/queries/:id",
+    path: "/query/:id",
     element:
       <PrivateRoute>
         <QueryDetails />
       </PrivateRoute>,
-    loader: ({ params }) => fetch(`https://sport-kek-server.vercel.app/equipment/${params._id}`),
+    loader: ({ params }) => fetch(`http://localhost:5000/query/${params._id}`),
   },
   { // Login & Registration systems
     path: '/auth',

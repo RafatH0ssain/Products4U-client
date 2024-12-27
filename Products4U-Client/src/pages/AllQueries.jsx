@@ -1,8 +1,9 @@
 import Header from "../components/Header";
 import Footer from '../components/Footer';
 import AuthProvider from '../provider/AuthProvider.jsx';
-import { useLoaderData, Link } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { useState, useEffect } from "react";
+import QueryCard from "../components/QueryCard"; // Import the QueryCard component
 
 const AllQueries = () => {
     let loadedData;
@@ -10,15 +11,15 @@ const AllQueries = () => {
         loadedData = useLoaderData();
     } catch (error) {
         console.error("useLoaderData error:", error);
-        loadedData = { queries: [], categories: [] };
+        loadedData = { queries: [] }; // Adjusted to queries instead of queries
     }
 
-    const [queries, setQueries] = useState([]);
+    const [queries, setProducts] = useState([]);
 
     // Ensure we handle data properly after the component mounts
     useEffect(() => {
         if (loadedData?.queries) {
-            setQueries(loadedData.queries);
+            setProducts(loadedData.queries); // Adjusted for queries
         }
     }, [loadedData]);
 
@@ -27,34 +28,15 @@ const AllQueries = () => {
             <div>
                 <Header />
                 <div className="w-11/12 mx-auto px-4 py-10">
-                    <h2 className="text-5xl font-bold text-left mb-6">All Queries:</h2>
+                    <h2 className="text-5xl font-bold text-left mb-6">All queries:</h2>
                     {queries.length > 0 ? (
-                        <table className="min-w-full table-auto border-collapse">
-                            <thead>
-                                <tr className="bg-gray-200">
-                                    <th className="px-4 py-2 border">Name</th>
-                                    <th className="px-4 py-2 border">Category</th>
-                                    <th className="px-4 py-2 border">Price</th>
-                                    <th className="px-4 py-2 border">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {queries.map((query) => (
-                                    <tr key={query._id} className="border-b">
-                                        <td className="px-4 py-2">{query.itemName}</td>
-                                        <td className="px-4 py-2">{query.categoryName}</td>
-                                        <td className="px-4 py-2">{query.price} USD</td>
-                                        <td className="px-4 py-2">
-                                            <Link to={`/query/${query._id}`} className="text-blue-500 hover:text-blue-700">
-                                                View Details
-                                            </Link>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                            {queries.map((product) => (
+                                <QueryCard key={product._id} product={product} />
+                            ))}
+                        </div>
                     ) : (
-                        <p>No query available at the moment.</p>
+                        <p>No queries available at the moment.</p>
                     )}
                 </div>
                 <Footer />
