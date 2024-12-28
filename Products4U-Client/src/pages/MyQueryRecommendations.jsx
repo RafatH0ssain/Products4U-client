@@ -5,56 +5,45 @@ import Footer from "../components/Footer";
 
 const MyQueryRecommendations = () => {
     const { user } = useContext(AuthContext); // Accessing the logged-in user's info from AuthContext
-    const [userQueries, setUserQueries] = useState([]); // To store logged-in user's queries
     const [recommendations, setRecommendations] = useState([]); // To store recommendations for user's queries
 
-    // Fetch user's queries
-    useEffect(() => {
-        const fetchUserQueries = async () => {
-            if (user && user.email) {
-                try {
-                    const response = await fetch(`http://localhost:5000/queries?userEmail=${user.email}`);
-                    if (!response.ok) {
-                        throw new Error("Failed to fetch user queries");
-                    }
-                    const data = await response.json();
-                    setUserQueries(data); // Set the queries to state
-                } catch (error) {
-                    console.error("Error fetching queries:", error);
-                }
-            }
-        };
-
-        fetchUserQueries();
-    }, [user]);
-
-    // Fetch recommendations for each query
+    // Fetch recommendations for the user's queries
     useEffect(() => {
         const fetchRecommendations = async () => {
-            if (userQueries.length > 0) {
+            if (user && user.email) {
                 try {
-                    const recommendationsPromises = userQueries.map(async (query) => {
-                        const response = await fetch(`http://localhost:5000/recommendations?queryId=${query._id}`);
-                        if (!response.ok) {
-                            throw new Error("Failed to fetch recommendations");
-                        }
-                        const data = await response.json();
-                        return {
-                            queryTitle: query.queryTitle,
-                            recommendations: data
-                        };
-                    });
-
-                    const recommendationsData = await Promise.all(recommendationsPromises);
-                    setRecommendations(recommendationsData); // Set recommendations to state
+                    const response = await fetch(`http://localhost:5000/recommendations/byUserQueries?userEmail=${user.email}`);
+                    if (!response.ok) {
+                        throw new Error("Failed to fetch recommendations");
+                    }
+                    const data = await response.json();
+                    console.log("Recommendations Data:", data);
+                    setRecommendations(data); // Set recommendations to state
                 } catch (error) {
                     console.error("Error fetching recommendations:", error);
                 }
             }
         };
-
+    
         fetchRecommendations();
-    }, [userQueries]);
+    }, [user]);
+    
+
+    // Delete recommendation
+    const deleteRecommendation = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:5000/recommendations/${id}`, {
+                method: 'DELETE'
+            });
+            if (!response.ok) {
+                throw new Error("Failed to delete recommendation");
+            }
+            // Remove deleted recommendation from state
+            setRecommendations(recommendations.filter(r => r._id !== id));
+        } catch (error) {
+            console.error("Error deleting recommendation:", error);
+        }
+    };
 
     return (
         <div>
@@ -73,31 +62,32 @@ const MyQueryRecommendations = () => {
                                     <th className="px-4 py-2">Product Name</th>
                                     <th className="px-4 py-2">Recommended By</th>
                                     <th className="px-4 py-2">Reason</th>
+                                    <th className="px-4 py-2">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {recommendations.map((queryRecommendation, index) => (
-                                    <tr key={index}>
-                                        <td className="px-4 py-2">{queryRecommendation.queryTitle}</td>
-                                        {queryRecommendation.recommendations.length > 0 ? (
-                                            queryRecommendation.recommendations.map((recommendation) => (
-                                                <tr key={recommendation._id}>
-                                                    <td className="px-4 py-2">{recommendation.recommendationTitle}</td>
-                                                    <td className="px-4 py-2">{recommendation.productName}</td>
-                                                    <td className="px-4 py-2">{recommendation.recommenderName}</td>
-                                                    <td className="px-4 py-2">{recommendation.reason}</td>
-                                                </tr>
-                                            ))
-                                        ) : (
-                                            <td className="px-4 py-2" colSpan="5">No recommendations yet.</td>
-                                        )}
+                                {recommendations.map((recommendation) => (
+                                    <tr key={recommendation._id}>
+                                        <td className="px-4 py-2">{recommendation.queryTitle}</td>
+                                        <td className="px-4 py-2">{recommendation.recommendationTitle}</td>
+                                        <td className="px-4 py-2">{recommendation.productName}</td>
+                                        <td className="px-4 py-2">{recommendation.recommenderName}</td>
+                                        <td className="px-4 py-2">{recommendation.reason}</td>
+                                        <td className="px-4 py-2">
+                                            <button
+                                                className="bg-red-500 text-white p-2 rounded"
+                                                onClick={() => deleteRecommendation(recommendation._id)}
+                                            >
+                                                Delete
+                                            </button>
+                                        </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
                     </div>
                 ) : (
-                    <p className="text-gray-400">You haven't posted any queries yet.</p>
+                    <p className="text-gray-400">No recommendations for your queries yet.</p>
                 )}
             </div>
 

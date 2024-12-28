@@ -15,6 +15,7 @@ const QueryDetails = () => {
         reason: '',
     });
     const [message, setMessage] = useState('');
+    const [recommendations, setRecommendations] = useState([]); // To hold recommendations
     const { user } = useContext(AuthContext); // Get logged-in user details
 
     // Fetch query details from the server
@@ -27,8 +28,17 @@ const QueryDetails = () => {
                 }
                 const data = await response.json();
                 setQuery(data);
+
+                // After fetching the query, fetch the recommendations for this query
+                const recommendationsResponse = await fetch(`http://localhost:5000/recommendations/byQuery/${id}`);
+                if (recommendationsResponse.ok) {
+                    const recommendationsData = await recommendationsResponse.json();
+                    setRecommendations(recommendationsData); // Store recommendations
+                } else {
+                    console.error("Failed to fetch recommendations");
+                }
             } catch (error) {
-                console.error("Error fetching query details:", error);
+                console.error("Error fetching query details or recommendations:", error);
             }
         };
 
@@ -45,7 +55,7 @@ const QueryDetails = () => {
 
     const handleRecommendationSubmit = async (e) => {
         e.preventDefault();
-        
+
         if (!user) {
             setMessage('You need to log in to submit a recommendation');
             return;
@@ -76,6 +86,13 @@ const QueryDetails = () => {
                 setMessage('Recommendation added successfully!');
                 // Increase recommendation count on the query page
                 await fetch(`http://localhost:5000/update-query/${id}`, { method: 'PATCH' });
+
+                // Re-fetch the recommendations after adding a new one
+                const recommendationsResponse = await fetch(`http://localhost:5000/recommendations/byQuery/${id}`);
+                if (recommendationsResponse.ok) {
+                    const recommendationsData = await recommendationsResponse.json();
+                    setRecommendations(recommendationsData); // Update recommendations list
+                }
             } else {
                 throw new Error('Failed to add recommendation');
             }
@@ -111,6 +128,42 @@ const QueryDetails = () => {
                     </div>
                 </div>
 
+                {/* Recommendations Section */}
+                <div className="mt-10">
+                    <h3 className="text-4xl font-bold mb-5 underline">Recommendations:</h3>
+                    {recommendations.length === 0 ? (
+                        <p className="text-lg text-gray-400">No recommendations yet for this query.</p>
+                    ) : (
+                        recommendations.map((rec, index) => (
+                            <div key={index} className="p-4 mb-4 rounded-2xl bg-black border-white border-4 shadow-lg flex items-start gap-6">
+                                {/* Left Side: Image */}
+                                <div className="w-64 h-auto">
+                                    {rec.productImage && (
+                                        <img
+                                            src={rec.productImage}
+                                            alt={rec.productName}
+                                            className="w-full h-auto rounded-lg"
+                                        />
+                                    )}
+                                </div>
+
+                                {/* Right Side: Text (Reason, Recommender) */}
+                                <div className="flex flex-col justify-between">
+                                    <h4 className="text-xl font-semibold">{rec.title}</h4>
+                                    <p className="text-gray-400 mt-2"><strong>Product:</strong> {rec.productName}</p>
+
+                                    <div className="mt-4 flex flex-col">
+                                        <p className="text-gray-400"><strong>Reason:</strong> {rec.reason}</p>
+                                        <p className="text-gray-400"><strong>Recommender:</strong> {rec.recommenderName}</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        ))
+                    )}
+                </div>
+
+                {/* Add Recommendation Form */}
                 <div className="mt-10">
                     <h3 className="text-3xl font-bold mb-5">Add a Recommendation</h3>
                     {message && <p className="text-lg text-green-500">{message}</p>}

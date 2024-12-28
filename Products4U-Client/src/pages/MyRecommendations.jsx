@@ -37,20 +37,24 @@ const MyRecommendations = () => {
                 {recommendations.length > 0 ? (
                     <div className="space-y-6 text-white">
                         {recommendations.map((recommendation) => (
-                            <div key={recommendation._id} className="p-6 bg-gray-800 rounded-xl shadow-lg">
-                                <h3 className="text-xl font-bold">{recommendation.recommendationTitle}</h3>
-                                <p className="text-gray-400 mt-2"><strong>Product Name:</strong> {recommendation.productName}</p>
-                                <img
-                                    src={recommendation.productImage}
-                                    alt={recommendation.productName}
-                                    className="w-full md:w-1/2 rounded-xl mt-4"
-                                />
-                                <p className="text-gray-400 mt-2"><strong>Recommended by:</strong> {recommendation.recommenderName}</p>
-                                <p className="text-gray-400 mt-2"><strong>Recommendation Reason:</strong> {recommendation.reason}</p>
-                                <p className="text-gray-400 mt-2"><strong>Query Title:</strong> {recommendation.queryTitle}</p>
-                                <p className="text-gray-400 mt-2"><strong>Query ID:</strong> {recommendation.queryId}</p>
-                                <p className="text-gray-400 mt-2"><strong>Recommender Email:</strong> {recommendation.recommenderEmail}</p>
-                                <p className="text-gray-400 mt-2"><strong>Timestamp:</strong> {new Date(recommendation.timestamp).toLocaleString()}</p>
+                            <div key={recommendation._id} className="flex gap-5 p-6 bg-black border-white border-4 rounded-3xl shadow-lg">
+                                <div>
+                                    <h3 className="text-xl font-bold">{recommendation.recommendationTitle}</h3>
+                                    <p className="text-gray-400 mt-2"><strong>Product Name:</strong> {recommendation.productName}</p>
+                                    <img
+                                        src={recommendation.productImage}
+                                        alt={recommendation.productName}
+                                        className="w-64 rounded-xl mt-4"
+                                    />
+                                </div>
+                                <div className="pt-16">
+                                    <p className="text-gray-400 mt-2"><strong>Recommended by:</strong> {recommendation.recommenderName}</p>
+                                    <p className="text-gray-400 mt-2"><strong>Recommendation Reason:</strong> {recommendation.reason}</p>
+                                    <p className="text-gray-400 mt-2"><strong>Query Title:</strong> {recommendation.queryTitle}</p>
+                                    <p className="text-gray-400 mt-2"><strong>Query ID:</strong> {recommendation.queryId}</p>
+                                    <p className="text-gray-400 mt-2"><strong>Recommender Email:</strong> {recommendation.recommenderEmail}</p>
+                                    <p className="text-gray-400 mt-2"><strong>Timestamp:</strong> {new Date(recommendation.timestamp).toLocaleString()}</p>
+                                </div>
                             </div>
                         ))}
                     </div>

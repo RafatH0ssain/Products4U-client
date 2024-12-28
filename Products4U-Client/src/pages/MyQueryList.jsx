@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useContext } from "react";
 import { AuthContext } from "../provider/AuthProvider";
+import QueryUpdateModal from "../components/QueryUpdateModal";
+import handleChange from "../components/QueryUpdateModal";
 
 const MyQueryList = () => {
     const [formData, setFormData] = useState({
@@ -11,21 +13,21 @@ const MyQueryList = () => {
         productBrand: "",
         productImageURL: "",
         queryTitle: "",
-        boycottingReasonDetails: ""
+        boycottingReasonDetails: "",
     });
 
     const [queries, setQueries] = useState([]);
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState("");
-    const navigate = useNavigate(); // Initialize navigate
+    const [selectedQueryId, setSelectedQueryId] = useState(null); // Track the selected query ID for updating
+    const navigate = useNavigate();
 
-    // Assuming the user's email is stored in localStorage (you can use sessionStorage or context instead)
-    const {user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     const userEmail = user.email;
-    console.log(userEmail);
+
     useEffect(() => {
         const fetchUserQueries = async () => {
-            if (!userEmail) return; // If no user is logged in, do not fetch
+            if (!userEmail) return;
 
             try {
                 const response = await fetch(`http://localhost:5000/queries/byUserEmail?userEmail=${userEmail}`);
@@ -42,19 +44,8 @@ const MyQueryList = () => {
         fetchUserQueries();
     }, [userEmail]);
 
-    // Handle form field changes
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value
-        }));
-    };
-
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         const { productName, productBrand, productImageURL, queryTitle, boycottingReasonDetails } = formData;
 
         if (!productName || !productBrand || !productImageURL || !queryTitle || !boycottingReasonDetails) {
@@ -71,7 +62,7 @@ const MyQueryList = () => {
             const response = await fetch("http://localhost:5000/queries", {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
                     productName,
@@ -79,8 +70,8 @@ const MyQueryList = () => {
                     productImageURL,
                     queryTitle,
                     boycottingReasonDetails,
-                    userEmail // Include the logged-in user's email in the query data
-                })
+                    userEmail,
+                }),
             });
 
             if (response.ok) {
@@ -90,9 +81,8 @@ const MyQueryList = () => {
                     productBrand: "",
                     productImageURL: "",
                     queryTitle: "",
-                    boycottingReasonDetails: ""
+                    boycottingReasonDetails: "",
                 });
-                // Fetch updated queries after adding a new one
                 fetchUserQueries();
             } else {
                 setMessage("Failed to add query.");
@@ -103,7 +93,6 @@ const MyQueryList = () => {
         }
     };
 
-    // Handle delete query
     const handleDelete = async (queryId) => {
         const confirmation = window.confirm("Are you sure you want to delete this query?");
         if (confirmation) {
@@ -116,20 +105,25 @@ const MyQueryList = () => {
         }
     };
 
-    // Handle update query
     const handleUpdate = (queryId) => {
-        navigate(`/query/update/${queryId}`);
+        setSelectedQueryId(queryId); // Open modal with the selected query
     };
 
-    // Handle view query details
-    const handleViewDetails = (queryId) => {
-        navigate(`/query/${queryId}`);
+    const handleCloseModal = () => {
+        setSelectedQueryId(null); // Close modal by resetting selectedQueryId
+    };
+
+    const handleUpdateQuery = (updatedQuery) => {
+        setQueries((prevQueries) =>
+            prevQueries.map((query) =>
+                query._id === updatedQuery._id ? updatedQuery : query
+            )
+        );
     };
 
     return (
         <div>
             <Header />
-
             <div className="w-11/12 mx-auto py-10">
                 <h2 className="font-bold text-5xl mb-8">Your Queries:</h2>
 
@@ -144,24 +138,12 @@ const MyQueryList = () => {
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
                         {queries.map((query) => (
-                            <div key={query._id} className="bg-gray-800 p-6 rounded-xl shadow-lg">
+                            <div key={query._id} className="bg-black p-6 border-4 border-white rounded-3xl shadow-lg">
                                 <h3 className="text-2xl font-semibold mb-4">{query.queryTitle}</h3>
-                                <p className="text-gray-400 mb-2">
-                                    <strong>Product:</strong> {query.productName}
-                                </p>
-                                <p className="text-gray-400 mb-2">
-                                    <strong>Brand:</strong> {query.productBrand}
-                                </p>
-                                <p className="text-gray-400 mb-4">
-                                    <strong>Reason:</strong> {query.boycottingReasonDetails || "No reason specified"}
-                                </p>
+                                <p className="text-gray-400 mb-2"><strong>Product:</strong> {query.productName}</p>
+                                <p className="text-gray-400 mb-2"><strong>Brand:</strong> {query.productBrand}</p>
+                                <p className="text-gray-400 mb-4"><strong>Reason:</strong> {query.boycottingReasonDetails || "No reason specified"}</p>
                                 <div className="flex justify-between">
-                                    <button
-                                        onClick={() => handleViewDetails(query._id)}
-                                        className="bg-blue-500 text-white p-2 rounded-lg"
-                                    >
-                                        View Details
-                                    </button>
                                     <button
                                         onClick={() => handleUpdate(query._id)}
                                         className="bg-yellow-500 text-white p-2 rounded-lg"
@@ -181,9 +163,8 @@ const MyQueryList = () => {
                 )}
 
                 {/* Add Query Form */}
-                <div className="bg-gray-800 p-6 rounded-xl shadow-lg">
+                <div className="bg-black p-6 border-4 border-white rounded-3xl shadow-lg">
                     <h3 className="text-2xl font-semibold mb-4">Add a New Query</h3>
-
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <div>
                             <label className="text-gray-300" htmlFor="productName">Product Name</label>
@@ -260,6 +241,15 @@ const MyQueryList = () => {
             </div>
 
             <Footer />
+
+            {/* Modal */}
+            {selectedQueryId && (
+                <QueryUpdateModal
+                    queryId={selectedQueryId}
+                    onClose={handleCloseModal}
+                    onUpdate={handleUpdateQuery}
+                />
+            )}
         </div>
     );
 };

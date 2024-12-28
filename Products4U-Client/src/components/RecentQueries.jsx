@@ -13,7 +13,7 @@ const RecentQueries = () => {
             } catch (error) {
                 console.error("Error fetching recent queries:", error);
             }
-        };        
+        };
 
         fetchRecentQueries();
     }, []);
@@ -25,14 +25,19 @@ const RecentQueries = () => {
             {queries.length > 0 ? (
                 <div className="space-y-6">
                     {queries.map((query) => (
-                        <div key={query._id} className="p-6 bg-gray-800 rounded-xl shadow-lg">
-                            <h3 className="text-xl font-bold">{query.queryTitle}</h3>
-                            <p className="text-gray-400 mt-2">
-                                <strong>Product:</strong> {query.productName}
-                            </p>
-                            <p className="text-gray-400 mt-2">
-                                <strong>Reason:</strong> {query.boycottingReasonDetails || "No reason specified"}
-                            </p>
+                        <div key={query._id} className="flex gap-5 p-6 bg-black border-4 border-white rounded-3xl shadow-lg">
+                            <div>
+                                <img src={query.productImageURL} alt={query.productName} className="w-64" />
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-bold">{query.queryTitle}</h3>
+                                <p className="text-gray-400 mt-2">
+                                    <strong>Product:</strong> {query.productName}
+                                </p>
+                                <p className="text-gray-400 mt-2">
+                                    <strong>Reason:</strong> {query.boycottingReasonDetails || "No reason specified"}
+                                </p>
+                            </div>
                         </div>
                     ))}
                 </div>

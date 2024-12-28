@@ -1,43 +1,8 @@
+import Carousel from "./Carousel";
 const SliderExplained = () => {
     return (
         <div className="md:flex justify-between gap-5">
-            <div className="carousel carousel-center rounded-3xl max-w-md space-x-4">
-                <div className="carousel-item h-[500px] w-full">
-                    <img
-                        src="https://i.ibb.co/QPZcPt1/mouse1.jpg"
-                        className="rounded-box w-full h-full object-cover" />
-                </div>
-                <div className="carousel-item h-[500px] w-full">
-                    <img
-                        src="https://i.ibb.co/kGBVnzH/laptop1.jpg"
-                        className="rounded-box w-full h-full object-cover" />
-                </div>
-                <div className="carousel-item h-[500px] w-full">
-                    <img
-                        src="https://i.ibb.co/grGWDCy/earbuds2.jpg"
-                        className="rounded-box w-full h-full object-cover" />
-                </div>
-                <div className="carousel-item h-[500px] w-full">
-                    <img
-                        src="https://i.ibb.co/vVFHVDr/keyboard1.jpg"
-                        className="rounded-box w-full h-full object-cover" />
-                </div>
-                <div className="carousel-item h-[500px] w-full">
-                    <img
-                        src="https://i.ibb.co/XkZQkdn/monitor2.jpg"
-                        className="rounded-box w-full h-full object-cover" />
-                </div>
-                <div className="carousel-item h-[500px] w-full">
-                    <img
-                        src="https://i.ibb.co/Brcnm52/earbuds1.jpg"
-                        className="rounded-box w-full h-full object-cover" />
-                </div>
-                <div className="carousel-item h-[500px] w-full">
-                    <img
-                        src="https://i.ibb.co/RTqzvmJ/monitor1.jpg"
-                        className="rounded-box w-full h-full object-cover" />
-                </div>
-            </div>
+            <Carousel/>
             <div className="flex flex-col justify-center items-start px-10 border-4 border-white text-white rounded-3xl md:7/12 w-full h-[500px]">
                 <h2 className="text-4xl font-bold mb-8 mx-auto underline">Why Choose Products4U?</h2>
                 <p className="text-xl mb-4">
