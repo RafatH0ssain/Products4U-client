@@ -30,7 +30,7 @@ const MyQueryList = () => {
             if (!userEmail) return;
 
             try {
-                const response = await fetch(`http://localhost:5000/queries/byUserEmail?userEmail=${userEmail}`);
+                const response = await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/queries/byUserEmail?userEmail=${userEmail}`);
                 const data = await response.json();
                 setQueries(data);
             } catch (error) {
@@ -59,7 +59,7 @@ const MyQueryList = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:5000/queries", {
+            const response = await fetch("https://products4-u-server-rafat-hossains-projects.vercel.app//queries", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -97,7 +97,7 @@ const MyQueryList = () => {
         const confirmation = window.confirm("Are you sure you want to delete this query?");
         if (confirmation) {
             try {
-                await fetch(`http://localhost:5000/query/${queryId}`, { method: 'DELETE' });
+                await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app//query/${queryId}`, { method: 'DELETE' });
                 setQueries(queries.filter(query => query._id !== queryId));
             } catch (error) {
                 console.error("Error deleting query:", error);

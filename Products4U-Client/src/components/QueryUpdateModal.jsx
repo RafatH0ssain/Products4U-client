@@ -8,11 +8,11 @@ const QueryUpdateModal = ({ queryId, onClose, onUpdate }) => {
         queryTitle: "",
         boycottingReasonDetails: "",
     });
-
+    
     useEffect(() => {
         const fetchQueryDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/query/${queryId}`);
+                const response = await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/query/${queryId}`);
                 const data = await response.json();
                 setQueryDetails(data);
             } catch (error) {
@@ -44,7 +44,7 @@ const QueryUpdateModal = ({ queryId, onClose, onUpdate }) => {
         }
 
         try {
-            const response = await fetch(`http://localhost:5000/query/${queryId}`, {
+            const response = await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/query/${queryId}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -65,7 +65,7 @@ const QueryUpdateModal = ({ queryId, onClose, onUpdate }) => {
 
     return (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-50 z-50">
-            <div className="bg-white p-6 rounded-lg w-1/3">
+            <div className="bg-black p-6 rounded-3xl border-white border-8 w-1/3">
                 <h2 className="text-xl font-semibold mb-4">Update Query</h2>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>

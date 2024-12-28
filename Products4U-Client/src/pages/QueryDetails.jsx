@@ -22,7 +22,7 @@ const QueryDetails = () => {
     useEffect(() => {
         const fetchQueryDetails = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/query/${id}`);
+                const response = await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/query/${id}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch query details");
                 }
@@ -30,7 +30,7 @@ const QueryDetails = () => {
                 setQuery(data);
 
                 // After fetching the query, fetch the recommendations for this query
-                const recommendationsResponse = await fetch(`http://localhost:5000/recommendations/byQuery/${id}`);
+                const recommendationsResponse = await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/recommendations/byQuery/${id}`);
                 if (recommendationsResponse.ok) {
                     const recommendationsData = await recommendationsResponse.json();
                     setRecommendations(recommendationsData); // Store recommendations
@@ -74,7 +74,7 @@ const QueryDetails = () => {
         };
 
         try {
-            const response = await fetch('http://localhost:5000/recommendation', {
+            const response = await fetch('https://products4-u-server-rafat-hossains-projects.vercel.app/recommendation', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -85,10 +85,10 @@ const QueryDetails = () => {
             if (response.ok) {
                 setMessage('Recommendation added successfully!');
                 // Increase recommendation count on the query page
-                await fetch(`http://localhost:5000/update-query/${id}`, { method: 'PATCH' });
+                await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/update-query/${id}`, { method: 'PATCH' });
 
                 // Re-fetch the recommendations after adding a new one
-                const recommendationsResponse = await fetch(`http://localhost:5000/recommendations/byQuery/${id}`);
+                const recommendationsResponse = await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/recommendations/byQuery/${id}`);
                 if (recommendationsResponse.ok) {
                     const recommendationsData = await recommendationsResponse.json();
                     setRecommendations(recommendationsData); // Update recommendations list

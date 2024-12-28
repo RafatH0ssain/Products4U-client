@@ -28,15 +28,15 @@ const router = createBrowserRouter([
   },
   { // Queries Page
     path: "/queries",
-    element: <AllQueries/>,
+    element: <AllQueries />,
     loader: async () => {
       try {
-        const response = await fetch('http://localhost:5000/queries');
-    
+        const response = await fetch('https://products4-u-server-rafat-hossains-projects.vercel.app/queries');
+
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }
-    
+
         const queries = await response.json();
         console.log("Fetched queries:", queries);  // To debug
         return { queries };
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         console.error("Error fetching loader data:", error);
         return { queries: [] };
       }
-    }    
+    }
   },
   { //  Query Details Page
     path: "/query/:id",
@@ -52,7 +52,7 @@ const router = createBrowserRouter([
       <PrivateRoute>
         <QueryDetails />
       </PrivateRoute>,
-    loader: ({ params }) => fetch(`http://localhost:5000/query/${params._id}`),
+    loader: ({ params }) => fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/query/${params._id}`),
   },
   { // Login & Registration systems
     path: '/auth',

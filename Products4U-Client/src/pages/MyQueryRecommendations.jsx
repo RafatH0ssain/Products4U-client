@@ -12,7 +12,7 @@ const MyQueryRecommendations = () => {
         const fetchRecommendations = async () => {
             if (user && user.email) {
                 try {
-                    const response = await fetch(`http://localhost:5000/recommendations/byUserQueries?userEmail=${user.email}`);
+                    const response = await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/recommendations/byUserQueries?userEmail=${user.email}`);
                     if (!response.ok) {
                         throw new Error("Failed to fetch recommendations");
                     }
@@ -32,7 +32,7 @@ const MyQueryRecommendations = () => {
     // Delete recommendation
     const deleteRecommendation = async (id) => {
         try {
-            const response = await fetch(`http://localhost:5000/recommendations/${id}`, {
+            const response = await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/recommendations/${id}`, {
                 method: 'DELETE'
             });
             if (!response.ok) {

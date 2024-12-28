@@ -6,7 +6,7 @@ const RecentQueries = () => {
     useEffect(() => {
         const fetchRecentQueries = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/queries/latest`);
+                const response = await fetch(`https://products4-u-server-rafat-hossains-projects.vercel.app/queries/latest`);
                 if (!response.ok) throw new Error("Failed to fetch recent queries");
                 const data = await response.json();
                 setQueries(data);  // Use setQueries instead of setRecentQueries
