@@ -17,14 +17,14 @@ const Carousel = () => {
         // Change the image every 2 seconds
         const interval = setInterval(() => {
             setCurrentIndex(prevIndex => (prevIndex + 1) % images.length); // Loop back to the first image when reaching the end
-        }, 2000);
+        }, 1000);
 
         // Cleanup the interval when the component is unmounted
         return () => clearInterval(interval);
     }, [images.length]);
 
     return (
-        <div className="carousel carousel-center rounded-3xl max-w-md w-[500px] space-x-4">
+        <div className="carousel carousel-center rounded-3xl max-w-md sm:w-[500px] space-x-4">
             {images.map((src, index) => (
                 <div
                     key={index}

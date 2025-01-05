@@ -6,8 +6,7 @@ const ContactUs = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // You can handle form submission here (for example, save the data or show a success message)
-        console.log("Form submitted:", { email, query });
+        alert("Form successfully submitted!");
         setEmail('');
         setQuery('');
     };

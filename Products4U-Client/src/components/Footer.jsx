@@ -16,8 +16,8 @@ const Footer = () => {
                 <nav className="flex flex-col items-center justify-center w-1/4">
                     <h6 className="footer-title">Company</h6>
                     <a className="link link-hover" href="/#about-us">About Us</a>
-                    <a className="link link-hover" href="/#contact-us">Contact Us</a>
-                    <a className="link link-hover" href="https://youtu.be/pildU9lK6vM?si=fXZfIOaKSoPmIxo0" target="_blank">Collaborate</a>
+                    <a className="link link-hover" href="https://www.linkedin.com/in/muhammad-rafat-hossain">Contact Us</a>
+                    <a className="link link-hover" href="https://www.linkedin.com/in/muhammad-rafat-hossain" target="_blank">Collaborate</a>
                 </nav>
                 <nav className="flex flex-col items-center justify-center w-1/4">
                     <h6 className="footer-title">Socials</h6>
@@ -28,7 +28,7 @@ const Footer = () => {
             </footer>
             <footer className="footer bg-black text-base-content border-base-300 border-t px-10 py-4 text-center">
                 <aside className="grid-flow-col text-center m-auto text-white">
-                    <p>&copy;2024 Rafat Hossain. Some rights reserved.</p>
+                    <p>&copy;2025 Rafat Hossain. Some rights reserved.</p>
                 </aside>
             </footer>
         </div>
