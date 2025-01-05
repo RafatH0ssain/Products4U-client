@@ -41,19 +41,19 @@ const Login = () => {
     };
 
     return (
-        <div className="mt-6 min-h-screen flex justify-center items-center bg-white text-black">
-            <div className="card bg-gray-400 w-full max-w-lg mx-auto shrink-0 rounded-none p-10">
+        <div className="mt-6 min-h-screen flex justify-center items-center bg-black text-white">
+            <div className="card bg-white w-full max-w-lg mx-auto shrink-0 rounded-2xl p-10">
                 <h2 className="font-bold text-center text-3xl pt-5">Login your Account</h2>
                 <form onSubmit={handleSubmit} className="card-body">
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Email</span>
+                            <span className="font-bold text-white">Email</span>
                         </label>
                         <input type="email" placeholder="email" className="input input-bordered" required name="email" />
                     </div>
                     <div className="form-control">
                         <label className="label">
-                            <span className="label-text">Password</span>
+                            <span className="text-white font-bold">Password</span>
                         </label>
                         <input type="password" placeholder="password" className="input input-bordered" required name="password" />
                         {
@@ -68,7 +68,7 @@ const Login = () => {
                         <button className="btn btn-success text-white rounded-xl border-none hover:bg-black">Login</button>
                     </div>
                 </form>
-                <p className="text-center font-semibold">Don't Have An Account? <Link className="text-red-500" to="/auth/register">Register</Link></p>
+                <p className="text-center font-semibold pb-5">Don't Have An Account? <Link className="text-red-500" to="/auth/register">Register</Link></p>
             </div>
 
             {/* Toast Container */}

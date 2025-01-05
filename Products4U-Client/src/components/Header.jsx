@@ -43,11 +43,6 @@ const Header = () => {
                         <Link className='w-1/6 hover:bg-white hover:text-black hover:border-none border-white border-2 h-10 items-center justify-center flex rounded-full lg:text-2xl md:text-xl text-l font-bold py-6' to={'/myRecommendations'}>My Recom.</Link>
                     </>
                 )}
-
-                {/* For non-logged-in users, show Login option */}
-                {!user && !loading && (
-                    <Link className="w-1/6 hover:bg-white hover:text-black hover:border-none border-white border-2 h-10 items-center justify-center flex rounded-full lg:text-2xl md:text-xl text-l font-bold py-6" to="/auth/login">Login</Link>
-                )}
             </div>
         </div>
     );
