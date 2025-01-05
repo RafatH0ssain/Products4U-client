@@ -1,8 +1,9 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import { useContext, useState } from "react";
-import { ToastContainer, toast } from 'react-toastify'; // Import react-toastify
-import 'react-toastify/dist/ReactToastify.css';  // Import the CSS for toast notifications
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import SocialsLogin from "./SocialsLogin.jsx";
 
 const Login = () => {
     const { userLogin, setUser } = useContext(AuthContext);
@@ -41,7 +42,7 @@ const Login = () => {
     };
 
     return (
-        <div className="mt-6 min-h-screen flex justify-center items-center bg-black text-white">
+        <div className="mt-6 min-h-screen flex flex-col justify-center items-center bg-black text-white">
             <div className="card bg-white w-full max-w-lg mx-auto shrink-0 rounded-2xl p-10">
                 <h2 className="font-bold text-center text-3xl pt-5">Login your Account</h2>
                 <form onSubmit={handleSubmit} className="card-body">
@@ -70,7 +71,8 @@ const Login = () => {
                 </form>
                 <p className="text-center font-semibold pb-5">Don't Have An Account? <Link className="text-red-500" to="/auth/register">Register</Link></p>
             </div>
-
+            <h2 className="text-white text-3xl font-extrabold pt-16 pb-10">OR</h2>
+            <SocialsLogin />
             {/* Toast Container */}
             <ToastContainer />
         </div>

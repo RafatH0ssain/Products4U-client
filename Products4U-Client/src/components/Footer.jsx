@@ -22,7 +22,7 @@ const Footer = () => {
                 <nav className="flex flex-col items-center justify-center w-1/4">
                     <h6 className="footer-title">Socials</h6>
                     <Link to={"https://x.com"} target="_blank"><a className="link link-hover">Twitter</a></Link>
-                    <Link to={"https://facebook.com"} target="_blank"><a className="link link-hover">Facebook</a></Link>
+                    <Link to={"https://www.facebook.com/rafat.hossain.564"} target="_blank"><a className="link link-hover">Facebook</a></Link>
                     <Link to={"https://instagram.com"} target="_blank"><a className="link link-hover">Instagram</a></Link>
                 </nav>
             </footer>

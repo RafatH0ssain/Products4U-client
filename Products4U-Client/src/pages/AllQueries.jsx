@@ -77,7 +77,7 @@ const AllQueries = () => {
                                 <button
                                     onClick={() => paginate(currentPage - 1)}
                                     disabled={currentPage === 1}
-                                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-500"
                                 >
                                     Previous
                                 </button>
@@ -89,7 +89,7 @@ const AllQueries = () => {
                                 <button
                                     onClick={() => paginate(currentPage + 1)}
                                     disabled={currentPage === totalPages}
-                                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-500"
                                 >
                                     Next
                                 </button>

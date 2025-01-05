@@ -110,10 +110,10 @@ const QueryDetails = () => {
     }
 
     return (
-        <div className="min-h-screen bg-black text-white p-8">
+        <div className="min-h-screen bg-black text-white sm:p-8">
             <Header />
-            <div className="max-w-5xl mx-auto my-10">
-                <div className="flex flex-col md:flex-row items-center gap-8">
+            <div className="sm:max-w-5xl mx-auto my-10 p-7">
+                <div className="flex flex-col md:flex-row gap-8">
                     <img
                         src={query.productImageURL}
                         alt={query.productName}
@@ -127,7 +127,6 @@ const QueryDetails = () => {
                         <p className="text-gray-400"><strong>Created by:</strong> {query.userName} ({query.userEmail})</p>
                     </div>
                 </div>
-
                 {/* Recommendations Section */}
                 <div className="mt-10">
                     <h3 className="text-4xl font-bold mb-5 underline">Recommendations:</h3>
@@ -145,14 +144,13 @@ const QueryDetails = () => {
                                             className="w-full h-auto rounded-lg"
                                         />
                                     )}
+                                    <p className="text-gray-400 mt-2"><strong>Product:</strong> {rec.productName}</p>
                                 </div>
 
                                 {/* Right Side: Text (Reason, Recommender) */}
                                 <div className="flex flex-col justify-between">
                                     <h4 className="text-xl font-semibold">{rec.title}</h4>
-                                    <p className="text-gray-400 mt-2"><strong>Product:</strong> {rec.productName}</p>
-
-                                    <div className="mt-4 flex flex-col">
+                                    <div className="mt-4 gap-2 flex flex-col">
                                         <p className="text-gray-400"><strong>Reason:</strong> {rec.reason}</p>
                                         <p className="text-gray-400"><strong>Recommender:</strong> {rec.recommenderName}</p>
                                     </div>
@@ -165,7 +163,7 @@ const QueryDetails = () => {
 
                 {/* Add Recommendation Form */}
                 <div className="mt-10">
-                    <h3 className="text-3xl font-bold mb-5">Add a Recommendation</h3>
+                    <h3 className="text-3xl font-bold mb-5 underline">Add a Recommendation</h3>
                     {message && <p className="text-lg text-green-500">{message}</p>}
                     <form onSubmit={handleRecommendationSubmit} className="space-y-4">
                         <input
@@ -203,7 +201,7 @@ const QueryDetails = () => {
                             rows="4"
                             required
                         />
-                        <button type="submit" className="btn bg-blue-700 text-white border-none rounded-xl">Add Recommendation</button>
+                        <button type="submit" className="btn bg-blue-700 text-white border-none hover:bg-gray-500 rounded-xl">Add Recommendation</button>
                     </form>
                 </div>
             </div>

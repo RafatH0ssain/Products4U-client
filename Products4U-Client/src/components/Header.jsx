@@ -23,7 +23,7 @@ const Header = () => {
                         }
                         {user && user?.email ? (
                             <div className='flex sm:flex-row flex-col gap-2'>
-                                <Link to="/myQueries" className="btn bg-blue-700 text-white border-none rounded-full">My Queries</Link>
+                                <Link to="/myQueries" className="btn bg-blue-700 hover:bg-gray-500 text-white border-none rounded-full">My Queries</Link>
                                 <button onClick={logOut} className="btn btn-error border-none rounded-full">Log Out</button>
                             </div>
                         ) : (

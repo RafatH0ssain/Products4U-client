@@ -1,7 +1,7 @@
 import Carousel from "./Carousel";
 const SliderExplained = () => {
     return (
-        <div className="md:flex justify-between gap-5">
+        <div className="flex justify-between gap-5 flex-col-reverse sm:flex-row">
             <Carousel/>
             <div className="flex flex-col justify-center items-start px-10 border-4 border-white text-white rounded-3xl w-full sm:h-[500px]">
                 <h2 className="text-4xl font-bold my-5 mb-8 mx-auto underline">Why Choose Products4U?</h2>

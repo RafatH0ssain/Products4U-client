@@ -1,13 +1,15 @@
 import React from 'react';
 import { FaGoogle } from "react-icons/fa";
-import { getAuth, signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';  // Import useNavigate from react-router-dom
 
-// Firebase providers for Google
+// Firebase provider for Google
 const googleProvider = new GoogleAuthProvider();
-
 const auth = getAuth();
 
 const SocialsLogin = () => {
+    const navigate = useNavigate();  // Initialize the useNavigate hook
+
     const handleGoogleLogin = async () => {
         try {
             const result = await signInWithPopup(auth, googleProvider);
@@ -16,6 +18,9 @@ const SocialsLogin = () => {
             const token = credential.accessToken;
             const user = result.user;
             console.log('Google login success:', user.displayName);
+
+            // After successful login, navigate to the home page
+            navigate('/');  // Redirect to home ("/")
         } catch (error) {
             console.error('Error during Google login:', error.message);
         }
