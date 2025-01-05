@@ -15,7 +15,7 @@ const SocialsLogin = () => {
             const credential = GoogleAuthProvider.credentialFromResult(result);
             const token = credential.accessToken;
             const user = result.user;
-            console.log('Google login success:', user);
+            console.log('Google login success:', user.displayName);
         } catch (error) {
             console.error('Error during Google login:', error.message);
         }
@@ -27,9 +27,6 @@ const SocialsLogin = () => {
                 <button className="btn btn-outline btn-info" onClick={handleGoogleLogin}>
                     <FaGoogle /> Login With Google
                 </button>
-                {/* <button className="btn btn-outline btn-secondary" onClick={handleGitHubLogin}>
-                    <FaGithub /> Login With GitHub
-                </button> */}
             </div>
         </div>
     );
