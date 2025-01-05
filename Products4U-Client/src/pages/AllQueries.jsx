@@ -14,14 +14,33 @@ const AllQueries = () => {
         loadedData = { queries: [] }; // Adjusted to queries instead of queries
     }
 
-    const [queries, setProducts] = useState([]);
+    const [queries, setQueries] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [queriesPerPage, setQueriesPerPage] = useState(6); // Default to 6 queries per page
 
     // Ensure we handle data properly after the component mounts
     useEffect(() => {
         if (loadedData?.queries) {
-            setProducts(loadedData.queries); // Adjusted for queries
+            setQueries(loadedData.queries); // Adjusted for queries
         }
     }, [loadedData]);
+
+    // Get the current queries to display based on pagination
+    const indexOfLastQuery = currentPage * queriesPerPage;
+    const indexOfFirstQuery = indexOfLastQuery - queriesPerPage;
+    const currentQueries = queries.slice(indexOfFirstQuery, indexOfLastQuery);
+
+    // Handle page change
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // Handle queries per page change
+    const handleQueriesPerPageChange = (event) => {
+        setQueriesPerPage(parseInt(event.target.value));
+        setCurrentPage(1); // Reset to page 1 when the number of queries per page is changed
+    };
+
+    // Calculate total pages
+    const totalPages = Math.ceil(queries.length / queriesPerPage);
 
     return (
         <AuthProvider>
@@ -29,12 +48,53 @@ const AllQueries = () => {
                 <Header />
                 <div className="w-11/12 mx-auto px-4 py-10">
                     <h2 className="text-5xl font-bold text-left mb-6">All queries:</h2>
-                    {queries.length > 0 ? (
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {queries.map((product) => (
-                                <QueryCard key={product._id} product={product} />
+
+                    {/* Queries Per Page Dropdown */}
+                    <div className="mb-4">
+                        <label htmlFor="queriesPerPage" className="mr-2">Queries per page:</label>
+                        <select
+                            id="queriesPerPage"
+                            value={queriesPerPage}
+                            onChange={handleQueriesPerPageChange}
+                            className="p-2 border rounded"
+                        >
+                            {[6, 9, 12, 15].map((option) => (
+                                <option key={option} value={option}>{option}</option>
                             ))}
-                        </div>
+                        </select>
+                    </div>
+
+                    {queries.length > 0 ? (
+                        <>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                                {currentQueries.map((query) => (
+                                    <QueryCard key={query._id} product={query} />
+                                ))}
+                            </div>
+
+                            {/* Pagination Controls */}
+                            <div className="mt-6 flex justify-center">
+                                <button
+                                    onClick={() => paginate(currentPage - 1)}
+                                    disabled={currentPage === 1}
+                                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                                >
+                                    Previous
+                                </button>
+
+                                <div className="mx-4 flex items-center">
+                                    <span className="text-lg">{`Page ${currentPage} of ${totalPages}`}</span>
+                                </div>
+
+                                <button
+                                    onClick={() => paginate(currentPage + 1)}
+                                    disabled={currentPage === totalPages}
+                                    className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+                                >
+                                    Next
+                                </button>
+                            </div>
+                        </>
                     ) : (
                         <p>No queries available at the moment.</p>
                     )}

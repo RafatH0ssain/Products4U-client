@@ -9,20 +9,20 @@ const Header = () => {
         <div className="pb-10 bg-black p-5 text-white">
             <div className="navbar bg-black pb-5">
                 <div className="flex-1">
-                    <Link className="lg:text-6xl md:text-4xl text-2xl md:font-extrabold font-bold" to={'/'}>Products4U</Link>
+                    <Link className="lg:text-6xl md:text-4xl text-3xl md:font-extrabold font-bold" to={'/'}>Products4U</Link>
                 </div>
-                <div className="flex-none w-1/4 justify-around items-center">
-                    <div className="w-5/6 login flex justify-around items-center">
+                <div className="flex-none sm:w-1/4 w-[180px] justify-around items-center">
+                    <div className="login flex justify-around items-center">
                         {
                             user && user?.email ?
-                                <div className="px-5 text-center">
+                                <div className="sm:px-5 text-center flex flex-col items-center">
                                     <img src={user.photoURL} className='rounded-full w-10 h-10'/>
                                     <p className='font-bold'>{user.displayName}</p>
                                 </div> :
                                 <img src="https://i.pinimg.com/736x/3b/73/48/3b73483fa5af06e3ba35f4f71e541e7a.jpg" alt="Dummy User Picture" className="w-10 h-10 rounded-full" />
                         }
                         {user && user?.email ? (
-                            <div className='flex flex-row gap-2'>
+                            <div className='flex sm:flex-row flex-col gap-2'>
                                 <Link to="/myQueries" className="btn bg-blue-700 text-white border-none rounded-full">My Queries</Link>
                                 <button onClick={logOut} className="btn btn-error border-none rounded-full">Log Out</button>
                             </div>

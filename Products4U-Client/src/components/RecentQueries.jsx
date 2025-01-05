@@ -25,9 +25,9 @@ const RecentQueries = () => {
             {queries.length > 0 ? (
                 <div className="space-y-6">
                     {queries.map((query) => (
-                        <div key={query._id} className="flex gap-5 p-6 bg-black border-4 border-white rounded-3xl shadow-lg">
+                        <div key={query._id} className="flex sm:flex-row flex-col gap-5 p-6 bg-black border-4 border-white rounded-3xl shadow-lg">
                             <div>
-                                <img src={query.productImageURL} alt={query.productName} className="w-64" />
+                                <img src={query.productImageURL} alt={query.productName} className="sm:w-64 w-5/6 mx-auto" />
                             </div>
                             <div>
                                 <h3 className="text-xl font-bold">{query.queryTitle}</h3>
