@@ -33,7 +33,7 @@ This repository contains the **client-side** code for the Product4U platform.
 
 ## Live Demo
 
-[Live Website](#) *(https://products-4-u.web.app/)*
+[Live Website](https://products-4-u.web.app/)
 
 ## Technologies Used
 
