@@ -24,7 +24,7 @@ const AboutUs = () => {
                         </svg>
                     </div>
                     <div className="timeline-end mb-10">
-                        <time className="font-mono italic">December 21, 2024</time>
+                        <time className="font-mono italic">December 22, 2024</time>
                         <div className="text-lg font-black">Setting Up the Foundations</div>
                         I started by setting up the basic project structure, choosing Vite for fast development, and creating a clean user interface using Tailwind CSS and DaisyUI. The next few days were spent working on authentication and creating the first few routes.
                     </div>
@@ -38,7 +38,7 @@ const AboutUs = () => {
                         </svg>
                     </div>
                     <div className="timeline-start mb-10 md:text-end">
-                        <time className="font-mono italic">December 22, 2024</time>
+                        <time className="font-mono italic">December 25, 2024</time>
                         <div className="text-lg font-black">Feature Implementation</div>
                         I began adding more functionality, such as user accounts, product queries, and recommendation systems. It was a bit of a challenge to integrate the database with Firebase, but I slowly started seeing the project come together.
                     </div>
@@ -52,7 +52,7 @@ const AboutUs = () => {
                         </svg>
                     </div>
                     <div className="timeline-end mb-10">
-                        <time className="font-mono italic">December 23, 2024</time>
+                        <time className="font-mono italic">December 28, 2024</time>
                         <div className="text-lg font-black">Finishing Touches</div>
                         The last few days were spent fine-tuning the UI, debugging, and testing features like login/logout, user queries, and recommendations. I also made sure to add responsiveness and mobile support for a smooth user experience across devices.
                     </div>
@@ -66,9 +66,9 @@ const AboutUs = () => {
                         </svg>
                     </div>
                     <div className="timeline-start mb-10 md:text-end">
-                        <time className="font-mono italic">December 25, 2024</time>
+                        <time className="font-mono italic">December 30, 2024</time>
                         <div className="text-lg font-black">Project Complete</div>
-                        After a week of consistent effort, I completed the project on Christmas day. It was an incredibly satisfying experience, and I felt proud of what I had accomplished in such a short period of time. Now it's time to deploy it and share it with the world.
+                        After a week of consistent effort, I finally completed the project. It was an incredibly satisfying experience, and I felt proud of what I had accomplished in such a short period of time. This was a good project that helped me hone the fundamentals of full-stack web development.
                     </div>
                 </li>
             </ul>
